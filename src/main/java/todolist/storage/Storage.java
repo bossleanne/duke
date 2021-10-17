@@ -1,3 +1,5 @@
+package todolist;
+
 import java.io.*;
 import java.nio.file.*;
 import java.util.Scanner;
@@ -57,10 +59,10 @@ public class Storage{
         textToAppend = task.getTaskStatus()+splitBy+getStatusNum(task.getIsDone())+splitBy+task.getDescription();
         //use get class to access different method
         if(task.getClass().getName().equals("Deadline")){
-            fw.write(textToAppend+splitBy+Deadline.getBy());
+            fw.write(textToAppend+splitBy+ Deadline.getBy());
         }
         else if(task.getClass().getName().equals("Event")){
-            fw.write(textToAppend+splitBy+Event.getAt());
+            fw.write(textToAppend+splitBy+ Event.getAt());
         }else{
             fw.write(textToAppend);
         }

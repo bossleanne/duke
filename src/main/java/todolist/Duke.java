@@ -1,15 +1,10 @@
-/********
- * Created by IntelliJ IDEA.
- * User: Leanne.Sun
- * Date: 19/9/21
- * Time: 10:28 am
- * All rights reserved.
- */
+
+
+import todolist.Storage;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
-import java.nio.file.*;
 
 public class Duke {
 
@@ -17,7 +12,7 @@ public class Duke {
 
     private Storage storage;
 //    private Task tasks;
-//    private Ui ui;
+//    private Ui todolist.ui;
 
     public Duke(String filePath) {
         storage = new Storage(filePath);
@@ -151,9 +146,9 @@ public class Duke {
 
 
 //            if(mode>0){
-//                storage.modifyFile(tasks.get(taskIndex).taskStatus,tasks.get(taskIndex).isDone,tasks.get(taskIndex).description,doneId,mode);
+//                todolist.storage.modifyFile(tasks.get(taskIndex).taskStatus,tasks.get(taskIndex).isDone,tasks.get(taskIndex).description,doneId,mode);
 //            }else{
-//                storage.appendToFile(tasks.get(taskIndex).taskStatus,tasks.get(taskIndex).isDone,tasks.get(taskIndex).description);
+//                todolist.storage.appendToFile(tasks.get(taskIndex).taskStatus,tasks.get(taskIndex).isDone,tasks.get(taskIndex).description);
 //            }
 
             System.out.println("Now you have "+tasks.size()+" tasks in the list.\n"+DASHES);
