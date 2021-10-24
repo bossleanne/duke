@@ -1,4 +1,4 @@
-package todolist;
+package todolist.data.task;
 
 
 public class Todo extends Task {
@@ -17,8 +17,8 @@ public class Todo extends Task {
         return isDone;
     }
 
-    @Override
-    public String toString() {
-        return "Got it. I've added this task: \n  "+ super.toString();
-    }
+//    @Override
+//    public String toString() {
+//        return super.toString();
+//    }
 }

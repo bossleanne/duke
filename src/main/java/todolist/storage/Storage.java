@@ -1,16 +1,23 @@
-package todolist;
+package todolist.storage;
+
+import todolist.data.TaskList;
+import todolist.data.task.Deadline;
+import todolist.data.task.Event;
+import todolist.data.task.Task;
 
 import java.io.*;
-import java.nio.file.*;
-import java.util.Scanner;
+import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 
 public class Storage{
 
-    private String filePath;
-    private File f;
-    public String textToAppend = "";
-    public String splitBy = " | ";
+    public static String filePath;
+    public File f;
+    public TaskList taskList = new TaskList();
+
     public Storage(String filePath) {
         this.filePath = filePath;
         f = new File(filePath);
@@ -44,33 +51,58 @@ public class Storage{
     }
 
 //    TODO: transform the data into tasks,void decipher()
-    public void load() throws FileNotFoundException {
+    //decoder
+    public ArrayList<Task> load() throws IOException,FileNotFoundException {
+        checkThePath();
+        ArrayList<Task> tasks = new ArrayList<Task>();
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
 
         while (s.hasNext()) {
             System.out.println(s.nextLine());
         }
+        return tasks;
     }
     //TODO: ask prof if the duplicate tasks need to consider
     //TODO: ask if need to overwrite the file everytime user load
 
-    public void appendToFile(Task task) throws IOException {
+    public static String textToAppend = "";
+    public static String splitBy = " | ";
+
+
+    public static void appendToFile(Task task) throws IOException {
+        //create a new empty task list
         FileWriter fw = new FileWriter(filePath,true);
         textToAppend = task.getTaskStatus()+splitBy+getStatusNum(task.getIsDone())+splitBy+task.getDescription();
         //use get class to access different method
         if(task.getClass().getName().equals("Deadline")){
-            fw.write(textToAppend+splitBy+ Deadline.getBy());
+            fw.write(textToAppend+splitBy+Deadline.getBy());
         }
         else if(task.getClass().getName().equals("Event")){
-            fw.write(textToAppend+splitBy+ Event.getAt());
+            fw.write(textToAppend+splitBy+Event.getAt());
         }else{
             fw.write(textToAppend);
         }
         fw.write(System.lineSeparator());
         fw.close();
+//        for(int i = 0; i < taskList.taskCount(); i++)
+//        {
+//            Task t = taskList.tasks.get(i);
+//            textToAppend = t.getTaskStatus()+splitBy+getStatusNum(t.getIsDone())+splitBy+t.getDescription();
+//            //use get class to access different method
+//            if(t.getClass().getName().equals("todolist.data.task.Deadline")){
+//                fw.write(textToAppend+splitBy+ Deadline.getBy());
+//            }
+//            else if(t.getClass().getName().equals("todolist.data.task.Event")){
+//                fw.write(textToAppend+splitBy+ Event.getAt());
+//            }else{
+//                fw.write(textToAppend);
+//            }
+//        }
+//        fw.write(System.lineSeparator());
+//        fw.close();
     }
 
-    public String getStatusNum(Boolean isDone) {
+    public static String getStatusNum(Boolean isDone) {
         return (isDone ? "1" : "0"); // mark done task with X
     }
 

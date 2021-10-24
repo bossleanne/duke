@@ -1,4 +1,4 @@
-package todolist;
+package todolist.data.task;
 
 /********
  * Created by IntelliJ IDEA.
@@ -23,6 +23,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "Got it. I've added this task: \n  "+ super.toString() + " (at: " + at + ")";
+        return super.toString() + " (at: " + at + ")";
     }
 }

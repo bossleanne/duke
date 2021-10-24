@@ -1,12 +1,4 @@
-package todolist;
-
-/********
- * Created by IntelliJ IDEA.
- * User: Leanne.Sun
- * Date: 19/9/21
- * Time: 10:28 am
- * All rights reserved.
- */
+package todolist.data.task;
 
 public class Deadline extends Task {
 
@@ -23,6 +15,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "Got it. I've added this task: \n  "+ super.toString() + " (by: " + by + ")";
+        return super.toString() + " (by: " + by + ")";
     }
 }

@@ -1,4 +1,4 @@
-package todolist;
+package todolist.data.task;
 
 /********
  * Created by IntelliJ IDEA.
