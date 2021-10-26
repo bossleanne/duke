@@ -15,7 +15,7 @@ public class Parser {
 
         line = fullCommand.stripTrailing();
         String[] taskSplit = line.split(" ",2);    //taskSplit[0] -> setTaskStatus
-
+        String taskDescription = taskSplit[1];
         Status status;
 
         try{
@@ -25,7 +25,14 @@ public class Parser {
             }
 
             if (taskSplit[0].contains("list")){
+                System.out.println("HERE!!!!!!!");
+//                System.out.println("HERE!!!!!!!");
                 return new ListCommand(t);
+            }
+            else if (taskSplit[0].contains("find")){
+                SearchCommand s = new SearchCommand(t);
+                s.setSearch(taskSplit[1]);
+                return new SearchCommand(t);
             }
 
             else if(!contains(taskStatus)){
@@ -33,24 +40,23 @@ public class Parser {
             }
 
             else {
-//                taskDescription = taskSplit[1].stripLeading();
                 status = Status.valueOf(taskStatus);
                 switch (status){
-                    case TODO:
-                        t = createToDo(fullCommand);
-                        break;
-                    case DEADLINE:
-                        t = createDeadline(fullCommand);
-                        break;
-                    case EVENT:
-                        t = createEvent(fullCommand);
-                        break;
-                    case DELETE:
-                        return new DeleteCommand(getTaskId(fullCommand));
+                case TODO:
+                    t = createToDo(taskDescription);
+                    break;
+                case DEADLINE:
+                    t = createDeadline(taskDescription);
+                    break;
+                case EVENT:
+                    t = createEvent(taskDescription);
+                    break;
+                case DELETE:
+                    return new DeleteCommand(getTaskId(taskDescription));
 
-                    case DONE:
-                        //if the number big than the input number throw error
-                        return new DoneCommand(getTaskId(fullCommand));
+                case DONE:
+                    //if the number big than the input number throw error
+                    return new DoneCommand(getTaskId(taskDescription));
                 }
                 return new AddCommand(t);
             }
@@ -95,10 +101,6 @@ public class Parser {
     public static Task createToDo(String fullCommand){
         Todo todo = new Todo(fullCommand);
         todo.setTaskStatus("T");
-//        ui.showAddMessage(todo.toString());
-//        tasks.add(todo);
-//        System.out.println("DASHES"+todo.toString());
-//        todolist.storage.appendToFile(todo);
         return todo;
     }
 
@@ -107,10 +109,6 @@ public class Parser {
         String[] eventAndTime = fullCommand.split("/at");
         Event event = new Event(eventAndTime[0],eventAndTime[1]);
         event.setTaskStatus("E");
-//        ui.showAddMessage(event.toString());
-//        tasks.add(event);
-//        System.out.println("DASHES"+event.toString());
-//        todolist.storage.appendToFile(event);
         return event;
     }
 
@@ -119,10 +117,6 @@ public class Parser {
         String[] deadlineAndTime = fullCommand.split("/by");
         Deadline deadline = new Deadline(deadlineAndTime[0],deadlineAndTime[1]);
         deadline.setTaskStatus("D");
-//        tasks.add(deadline);
-//        ui.showAddMessage(deadline.toString());
-//        System.out.println("DASHES"+deadline.toString());
-//        todolist.storage.appendToFile(deadline);
         return deadline;
     }
 

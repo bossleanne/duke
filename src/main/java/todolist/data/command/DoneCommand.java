@@ -15,6 +15,7 @@ public class DoneCommand extends Command{
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.finishTask(doneId);
         ui.showModifyMessage(tasks.getTasks(doneId).toString());
+//        storage.modifyFile();
     }
 
     @Override

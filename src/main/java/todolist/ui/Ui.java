@@ -120,6 +120,7 @@ public class Ui {
         System.out.println(DASHES);
     }
 
+
     public void showError(String errorMessage) {
        System.out.println(errorMessage);
     }

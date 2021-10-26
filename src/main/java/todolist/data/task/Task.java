@@ -12,6 +12,7 @@ public class Task {
     protected String description;
     protected boolean isDone;
     protected String taskStatus;
+    //TODO priority need to add to this object
 
     public Task(String description) {
         this.description = description;
