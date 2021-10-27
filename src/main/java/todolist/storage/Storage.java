@@ -52,30 +52,26 @@ public class Storage{
     public static ArrayList<Task> load() throws IOException, DukeException {
 
         ArrayList<Task> loadTasks = new ArrayList<>();
-
         File f = new File(filePath);
-
         Scanner s = new Scanner(f);
 
         while (s.hasNext()) {
-
             String line = s.nextLine();
             String[] components = line.split(" \\| ");
             String taskStatus = components[0];
             boolean isDone = getBooleanNum(components[1]);
             String taskDescription = components[2];
-
             Task loadTask;
 
             switch (taskStatus) {
                 case "T":
-                    loadTask = Parser.createToDo("todo "+taskDescription);
+                    loadTask = Parser.createToDo(taskDescription);
                     break;
                 case "E":
-                    loadTask = Parser.createEvent("event "+taskDescription);
+                    loadTask = Parser.createEvent(taskDescription);
                     break;
                 case "D":
-                    loadTask = Parser.createDeadline("deadline "+taskDescription);
+                    loadTask = Parser.createDeadline(taskDescription);
                     break;
                 default:
                     throw new DukeException("Unexpected value: " + taskStatus);
@@ -97,7 +93,6 @@ public class Storage{
             textToAppend = appendToFile(task);
             writeToFile(filePath,textToAppend);
         }
-
     }
 
     private static void writeToFile(String filePath, String textToAppend) throws IOException {

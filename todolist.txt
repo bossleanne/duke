@@ -1,5 +1,2 @@
-T | 1 | todo todo read book
-T | 0 | todo todo borrow book
-D | 0 | deadline deadline return book by Sunday
-E | 1 | event event project meeting at Aug 6th 2-4pm
-E | 0 | event event project meeting at Aug 6th 2-4pm
+E | 1 | project meeting at Mon 2-4pm
+D | 0 | return book by Sunday
