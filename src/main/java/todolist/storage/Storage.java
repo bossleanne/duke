@@ -29,7 +29,6 @@ public class Storage{
         this.filePath = filePath;
     }
 
-
     public static void checkThePath() throws IOException {
         //get the full path of the file
         f = new File(filePath);
@@ -59,7 +58,7 @@ public class Storage{
 
     public static ArrayList<Task> load() throws IOException, DukeException {
 
-        checkThePath();
+//        checkThePath();
         ArrayList<Task> loadTasks = new ArrayList<>();
 
         File f = new File(filePath);
@@ -71,8 +70,9 @@ public class Storage{
             String line = s.nextLine();
             String[] components = line.split(" \\| ");
             String taskStatus = components[0];
-            boolean isDone = Boolean.parseBoolean(components[1]);
+            boolean isDone = getBooleanNum(components[1]);
             System.out.println("loadTask.getIsDone()  "+components[1]);
+            System.out.println("isDone  "+isDone);
             String taskDescription = components[2];
 
             Task loadTask;
@@ -117,7 +117,7 @@ public class Storage{
     public static String appendToFile(Task task) throws IOException {
 
         textToAppend = task.getTaskStatus()+
-                splitBy+getStatusNum(task.getIsDone())+
+                splitBy+getStringNum(task.getIsDone())+
                 splitBy+task.getDescription()+
                 System.lineSeparator();
 
@@ -132,8 +132,15 @@ public class Storage{
 
     }
 
-    public static String getStatusNum(Boolean isDone) {
+    public static String getStringNum(Boolean isDone) {
         return (isDone ? "1" : "0"); // mark done task with X
+    }
+
+    public static boolean getBooleanNum(String isDone) {
+        if(isDone.equals("1")){
+            return true;
+        }
+        return false;
     }
 
 //    public void modifyFileDelete(int lineNum) throws IOException {
