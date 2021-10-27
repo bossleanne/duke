@@ -30,14 +30,20 @@ public class SearchCommand extends Command{
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
 
         TaskList result = new TaskList();
+        boolean isFound = false;
 
         for(int i = 0; i< tasks.taskCount();i++){
-
             if(tasks.getTasks(i).getDescription() != null && tasks.getTasks(i).getDescription().contains(getSearch())){
                 result.addTask(tasks.getTasks(i));
+                isFound = true;
             }
         }
-        ui.showToUserAllTasks(result);
+        if (!isFound){
+            System.out.println("No matching tasks in your list, please try other keywords ");
+        }else{
+            ui.showToUserAllTasks(result);
+        }
+
     }
 
 }
