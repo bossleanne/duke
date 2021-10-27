@@ -15,7 +15,7 @@ public class Parser {
 
         line = fullCommand.stripTrailing();
         String[] taskSplit = line.split(" ",2);    //taskSplit[0] -> setTaskStatus
-        String taskDescription = taskSplit[1];
+
         Status status;
 
         try{
@@ -25,14 +25,12 @@ public class Parser {
             }
 
             if (taskSplit[0].contains("list")){
-                System.out.println("HERE!!!!!!!");
-//                System.out.println("HERE!!!!!!!");
                 return new ListCommand(t);
             }
             else if (taskSplit[0].contains("find")){
-                SearchCommand s = new SearchCommand(t);
+                SearchCommand s = new SearchCommand();
                 s.setSearch(taskSplit[1]);
-                return new SearchCommand(t);
+                return new SearchCommand();
             }
 
             else if(!contains(taskStatus)){
@@ -41,6 +39,7 @@ public class Parser {
 
             else {
                 status = Status.valueOf(taskStatus);
+                String taskDescription = taskSplit[1];
                 switch (status){
                 case TODO:
                     t = createToDo(taskDescription);

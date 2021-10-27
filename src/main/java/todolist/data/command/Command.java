@@ -12,6 +12,10 @@ public abstract class Command {
     protected Task task;
     protected int doneId;
 
+    public Command() {
+
+    }
+
     public Command(int doneId) {
         this.doneId = doneId;
     }
