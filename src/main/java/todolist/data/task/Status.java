@@ -1,5 +1,5 @@
 package todolist.data.task;
 
 public enum Status {
-    TODO, DONE, EVENT, DEADLINE, DELETE
+    TODO, DONE, EVENT, DEADLINE, DELETE, FIND
 }

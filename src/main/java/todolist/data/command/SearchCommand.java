@@ -18,6 +18,14 @@ public class SearchCommand extends Command{
         return search;
     }
 
+    public static final String COMMAND_WORD = "find";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": book "
+            + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
+            + "Parameters: Single String Keyword ...\n"
+            + "Example: " + COMMAND_WORD + " book";
+
+
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
 

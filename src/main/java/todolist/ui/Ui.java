@@ -5,21 +5,21 @@ import todolist.data.TaskList;
 import java.util.Scanner;
 
 public class Ui {
-    private String DASHES =
+    private static String DASHES =
             "----------------------------------------"
             + "----------------------------------------\n";
 
-    private String ADDEDPREFIX = "Got it. I've added this task: ";
-    private String DELETEPREFIX = "Noted. I've removed this task: ";
-    private String DONEEPREFIX = "Nice! I've marked this task as done: ";
+    private static String ADD_PREFIX = "Got it. I've added this task: ";
+    private static String DELETE_PREFIX = "Noted. I've removed this task: ";
+    private static String DONE_PREFIX = "Nice! I've marked this task as done: ";
     private static Integer TASKSIZE = 0;
-    private static String SUFFIX = ("Now you have "+"%1$d"+" tasks in the list.");
+    private static String TASK_SUFFIX = ("Now you have "+"%1$d"+" tasks in the list.");
+    private static String ERROR_PREFIX = "☹ OOPS!!! ";
+    private static String MESSAGE_SEARCH = "Here are the matching tasks in your list:";
 
-    private String SEARCH = "Here are the matching tasks in your list:";
+    private static String MESSAGE_GOODBYE = "Bye. Hope to see you again soon!";
 
-    private String MESSAGE_GOODBYE = " Bye. Hope to see you again soon!";
-
-    public DukeException dukeException;
+    public static DukeException dukeException;
 
 
     public String showLine(){
@@ -29,9 +29,9 @@ public class Ui {
     public void greeting(){
         System.out.println(
                 showLine()
-                + "Hello! Are you ready to start your day?\n"
-                + "Enter today's task: \n"
-                + showLine());
+                        + "Hello! Are you ready to start your day?\n"
+                        + "Enter today's task: \n"
+                        + showLine());
     }
 
     /**
@@ -73,46 +73,41 @@ public class Ui {
     }
 
     public static String getSuffix() {
-        return String.format(SUFFIX, getSize());
+        return String.format(TASK_SUFFIX, getSize());
     }
 
     public void showGoodbyeMessage() {
         System.out.println(
-            showLine()
-            + MESSAGE_GOODBYE+"\n"
-            + showLine());
+                showLine()
+                        + MESSAGE_GOODBYE+"\n"
+                        + showLine());
     }
 
     public void showAddMessage(String message) {
-        showToUser(ADDEDPREFIX,message,getSuffix());
+        showToUser(ADD_PREFIX,message,getSuffix());
     }
 
     public void showDeleteMessage(String message) {
-        showToUser(DELETEPREFIX,message,getSuffix());
+        showToUser(DELETE_PREFIX,message,getSuffix());
     }
     public void showModifyMessage(String message) {
-        showToUser(DONEEPREFIX,message,"");
+        showToUser(DONE_PREFIX,message,"");
     }
-//    public void showFindMessage(String message) {
-//        showToUser(message);
-//    }
 
-    //DIVIDER+MSG+DIVIDER;
     public void showToUser(String Prefix, String Message, String Suffix) {
         System.out.println(
                 showLine()
-                +Prefix + "\n"
-                +Message +"\n"
-                +Suffix + "\n"
-                +showLine()
+                        +Prefix + "\n"
+                        +Message +"\n"
+                        +Suffix + "\n"
+                        +showLine()
         );
     }
 
-
-    public void showToUserAllTasks(TaskList taskList){ //showTaskListView
+    public void showToUserAllTasks(TaskList taskList){
 
         System.out.print(DASHES);
-        System.out.println("Here are the tasks in your list:");
+        System.out.println(MESSAGE_SEARCH);
 
         for(int i = 0; i< taskList.taskCount();i++){
             System.out.println(i+1 + "."+taskList.getTasks(i).toString());
@@ -126,6 +121,24 @@ public class Ui {
     }
 
     public void showLoadingError(){
-        System.out.println("File not found");
+        System.out.println("No tasks file found, process to take new tasks");
+    }
+
+    public static void showIncorrectInputs(String taskStatus){
+        System.out.println(
+                DASHES
+                        + ERROR_PREFIX
+                        +"The description of a "+taskStatus+" cannot be empty.\n"
+                        +DASHES
+        );
+    }
+
+    public static void showNonZero(){
+        System.out.println(
+                DASHES
+                        + ERROR_PREFIX
+                        +" I'm sorry, but I don't know what that means :-(\n"
+                        +DASHES
+        );
     }
 }

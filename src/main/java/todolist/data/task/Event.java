@@ -17,12 +17,20 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public String getDescription() {
+        return description;
+    }
     public static String getAt(){
         return at;
     }
 
     @Override
+    public String getTime(){
+        return at;
+    }
+
+    @Override
     public String toString() {
-        return super.toString() + " (at: " + at + ")";
+        return super.toString() + " (at: " + getTime() + ")";
     }
 }

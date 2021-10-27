@@ -48,6 +48,10 @@ public class Task {
         setIsDone(true);
     }
 
+    public String getTime(){
+        return "";
+    }
+
 
     public String toString() {
         return "["+getTaskStatus()+"]"+"["+getStatusIcon()+"] "+getDescription();

@@ -1,8 +1,6 @@
 package todolist.storage;
 
 import todolist.data.TaskList;
-import todolist.data.task.Deadline;
-import todolist.data.task.Event;
 import todolist.data.task.Task;
 import todolist.parser.Parser;
 import todolist.ui.DukeException;
@@ -22,7 +20,6 @@ public class Storage{
     public static File f;
     public static String textToAppend = "";
     public static String splitBy = " | ";
-//    public static TaskList taskList;
 
 
     public Storage(String filePath) {
@@ -30,7 +27,7 @@ public class Storage{
     }
 
     public static void checkThePath() throws IOException {
-        //get the full path of the file
+
         f = new File(filePath);
         String tmpPath = f.getAbsolutePath();
         String path = "";
@@ -42,15 +39,11 @@ public class Storage{
 
         //check the validity of the path
         if (!Files.isDirectory(Paths.get(path))) {
-            System.out.println(path + " does not exists, Do you want to create new one? Y/n");
-            Scanner in = new Scanner(System.in);
-            String line = in.nextLine();
-            if (line.toLowerCase().equals("y")) {
-                File newfile = new File(path);
-                System.out.println(f.getParent() + " has has been created");
-                newfile.mkdir();
-            }
+            File newfile = new File(path);
+            System.out.println(f.getParent() + " has has been created");
+            newfile.mkdir();
         }
+
         if (f.createNewFile()) {
             System.out.println(file + " has been created.");
         }
@@ -58,7 +51,6 @@ public class Storage{
 
     public static ArrayList<Task> load() throws IOException, DukeException {
 
-//        checkThePath();
         ArrayList<Task> loadTasks = new ArrayList<>();
 
         File f = new File(filePath);
@@ -71,8 +63,6 @@ public class Storage{
             String[] components = line.split(" \\| ");
             String taskStatus = components[0];
             boolean isDone = getBooleanNum(components[1]);
-            System.out.println("loadTask.getIsDone()  "+components[1]);
-            System.out.println("isDone  "+isDone);
             String taskDescription = components[2];
 
             Task loadTask;
@@ -100,6 +90,9 @@ public class Storage{
     public static void store(TaskList tasks) throws IOException {
         checkThePath();
         String textToAppend = "";
+        FileWriter fw = new FileWriter(filePath);
+        fw.write("");
+        fw.close();
         for (Task task :tasks.tasks){
             textToAppend = appendToFile(task);
             writeToFile(filePath,textToAppend);
@@ -114,21 +107,19 @@ public class Storage{
     }
 
 
-    public static String appendToFile(Task task) throws IOException {
+    public static String appendToFile(Task task){
 
         textToAppend = task.getTaskStatus()+
-                splitBy+getStringNum(task.getIsDone())+
-                splitBy+task.getDescription()+
-                System.lineSeparator();
-
-        if(task.getClass().getName().equals("Deadline")){
-            textToAppend = textToAppend+splitBy+Deadline.getBy();
+                splitBy+getStringNum(task.getIsDone());
+        if(task.getTaskStatus().equals("D")){
+            textToAppend += splitBy + task.getDescription()+" by "+task.getTime();
         }
-        else if(task.getClass().getName().equals("Event")){
-            textToAppend = textToAppend+splitBy+Event.getAt();
+        else if(task.getTaskStatus().equals("E")){
+            textToAppend += splitBy + task.getDescription()+" at "+task.getTime();
+        }else{
+            textToAppend += splitBy+task.getDescription();
         }
-
-        return textToAppend;
+        return textToAppend+System.lineSeparator();
 
     }
 
@@ -142,76 +133,5 @@ public class Storage{
         }
         return false;
     }
-
-//    public void modifyFileDelete(int lineNum) throws IOException {
-//        String joined_str = "";
-//        String tempPath = "temp.txt";
-//        FileWriter fw = new FileWriter(tempPath);
-//
-//        LineNumberReader lineNumberReader = new LineNumberReader(new FileReader(filePath));
-//        String line = "";
-//
-//        while((line = lineNumberReader.readLine())!=null){
-//            String lineContent = line;
-//            String[] components = lineContent.split(" \\| ");
-//            if(lineNumberReader.getLineNumber()==lineNum){
-//                if(!mode){
-//                    components[1] = "1";
-//                    joined_str = String.join(" | ", components);
-//                    fw.write(joined_str+"\n");
-//                }
-//                else{//delete
-//                    lineNumberReader.skip(0);
-//                }
-//            }
-//            else{
-//                fw.write(lineContent+"\n");
-//            }
-//        }
-//        lineNumberReader.close();
-//        fw.close();
-//        fileMoving(filePath,tempPath);
-//    }
-//
-//    public void modifyFileDone(int lineNum) throws IOException { //mode 0/1 done/delelte
-//        String joined_str = "";
-//        String tempPath = "temp.txt";
-//        FileWriter fw = new FileWriter(tempPath);
-//
-//        LineNumberReader lineNumberReader = new LineNumberReader(new FileReader(filePath));
-//        String line = "";
-//
-//        while((line = lineNumberReader.readLine())!=null){
-//            String lineContent = line;
-//            String[] components = lineContent.split(" \\| ");
-//            if(lineNumberReader.getLineNumber()==lineNum){
-//                if(!mode){
-//                    components[1] = "1";
-//                    joined_str = String.join(" | ", components);
-//                    fw.write(joined_str+"\n");
-//                }
-//                else{//delete
-//                    lineNumberReader.skip(0);
-//                }
-//            }
-//            else{
-//                fw.write(lineContent+"\n");
-//            }
-//        }
-//        lineNumberReader.close();
-//        fw.close();
-//        fileMoving(filePath,tempPath);
-//    }
-
-//    public void fileMoving(String src, String dest) throws IOException{
-//        File f = new File(src);
-//        if(f.exists()){
-//            Files.delete(Paths.get(src));
-//            Files.copy(Paths.get(dest), Paths.get(src));
-//        }else{
-//            Files.copy(Paths.get(dest), Paths.get(src));
-//        }
-//        Files.delete(Paths.get(dest));
-//    }
 
 }

@@ -1,12 +1,12 @@
 package todolist;
 
 import todolist.data.TaskList;
-import todolist.storage.Storage;
-import todolist.ui.Ui;
-import todolist.parser.Parser;
 import todolist.data.command.Command;
+import todolist.parser.Parser;
+import todolist.storage.Storage;
+import todolist.ui.DukeException;
+import todolist.ui.Ui;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Duke {
@@ -19,7 +19,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException e) {
+        } catch (IOException | DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }

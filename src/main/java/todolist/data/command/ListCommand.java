@@ -7,6 +7,12 @@ import todolist.ui.Ui;
 
 public class ListCommand extends Command{
 
+    public static final String COMMAND_WORD = "list";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Displays all tasks in the todolist as a list with index numbers.\n"
+            + "Example: " + COMMAND_WORD;
+
     public ListCommand(Task task) {
         super(task);
     }

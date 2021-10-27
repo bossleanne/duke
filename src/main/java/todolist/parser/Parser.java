@@ -2,99 +2,76 @@ package todolist.parser;
 
 import todolist.data.command.*;
 import todolist.data.task.*;
-
+import todolist.ui.Ui;
 
 public class Parser {
 
 
     public static Task t;
+    public static Ui ui;
 
     public static Command parse(String fullCommand){
-        String line;
-        String taskStatus = "";
-
-        line = fullCommand.stripTrailing();
+        String line = fullCommand.stripTrailing();
         String[] taskSplit = line.split(" ",2);    //taskSplit[0] -> setTaskStatus
 
+        String taskStatus = taskSplit[0].toUpperCase();
         Status status;
 
+        SearchCommand s = new SearchCommand();
+
         try{
-            taskStatus = taskSplit[0].toUpperCase();
-            if(line.contains("bye")){
+            if(line.equals("bye")){
                 return new ExitCommand(t);
-            }
-
-            if (taskSplit[0].contains("list")){
+            } else if (taskSplit[0].equals("list")){
                 return new ListCommand(t);
-            }
-            else if (taskSplit[0].contains("find")){
-                SearchCommand s = new SearchCommand();
-                s.setSearch(taskSplit[1]);
-                return new SearchCommand();
-            }
-
-            else if(!contains(taskStatus)){
-                throw new IllegalArgumentException("Invalid argument");
-            }
-
-            else {
+            } else if (taskSplit[0].equals("help")){
+                return new HelpCommand();
+            } else {
                 status = Status.valueOf(taskStatus);
                 String taskDescription = taskSplit[1];
+
                 switch (status){
                 case TODO:
                     t = createToDo(taskDescription);
-                    break;
+                    return new AddCommand(t);
+
                 case DEADLINE:
                     t = createDeadline(taskDescription);
-                    break;
+                    return new AddCommand(t);
+
                 case EVENT:
                     t = createEvent(taskDescription);
-                    break;
+                    return new AddCommand(t);
+
                 case DELETE:
                     return new DeleteCommand(getTaskId(taskDescription));
 
                 case DONE:
                     //if the number big than the input number throw error
                     return new DoneCommand(getTaskId(taskDescription));
+
+                case FIND:
+                    s.setSearch(taskDescription);
+                    return new SearchCommand();
                 }
-                return new AddCommand(t);
             }
         }
         catch(ArrayIndexOutOfBoundsException e){
-            System.out.println(
-                    "DASHES"
-                            +"☹ OOPS!!! The description of a "+taskStatus+" cannot be empty.\n"
-                            +"DASHES");
+            ui.showIncorrectInputs(taskStatus);
         }
         catch (IllegalArgumentException e){
-            System.out.println(
-                    "DASHES"
-                            + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                            + "DASHES");
+            ui.showNonZero();
         }
-        //check the input is not 0, is not exceed the total tasks index
-        catch(NullPointerException e){
-            System.out.println("There are only "+"tasks.taskCount()"+" tasks, please enter the correct task number");
-        }
+
         //check the 0 or negative
 //        catch(ArrayIndexOutOfBoundsException e){
 //            System.out.println("There are only "+"tasks.taskCount()"+" tasks, please enter the correct task number");
 //        }
 //        catch(IndexOutOfBoundsException e){
-//            System.out.println("todolist.data.task.Task number entered: "+taskDescription+" is invalid");
+//            System.out.println("todolist.data.task.Task number entered: "+"taskDescription"+" is invalid");
 //        }
 
-        return new ExitCommand(t);
-    }
-
-
-    public static boolean contains(String test) {
-        for (Status c : Status.values()) {
-            if (c.name().equals(test)) {
-                return true;
-            }
-        }
-        return false;
+        return new ContinueCommand();
     }
 
     public static Task createToDo(String fullCommand){
@@ -105,16 +82,18 @@ public class Parser {
 
 
     public static Task createEvent(String fullCommand){
-        String[] eventAndTime = fullCommand.split("/at");
-        Event event = new Event(eventAndTime[0],eventAndTime[1]);
+        String[] eventAndTime = fullCommand.split("at");
+        eventAndTime[0] = eventAndTime[0].replace(" /", "");
+        Event event = new Event(eventAndTime[0].trim(),eventAndTime[1].trim());
         event.setTaskStatus("E");
         return event;
     }
 
 
     public static Task createDeadline(String fullCommand){
-        String[] deadlineAndTime = fullCommand.split("/by");
-        Deadline deadline = new Deadline(deadlineAndTime[0],deadlineAndTime[1]);
+        String[] deadlineAndTime = fullCommand.split("by");
+        deadlineAndTime[0] = deadlineAndTime[0].replace(" /", "");
+        Deadline deadline = new Deadline(deadlineAndTime[0].trim(),deadlineAndTime[1].trim());
         deadline.setTaskStatus("D");
         return deadline;
     }
