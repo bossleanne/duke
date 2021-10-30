@@ -2,6 +2,7 @@ package todolist.parser;
 
 import todolist.data.command.*;
 import todolist.data.task.*;
+import todolist.parser.time.ParserDate;
 import todolist.ui.Ui;
 
 public class Parser {
@@ -47,7 +48,6 @@ public class Parser {
                     return new DeleteCommand(getTaskId(taskDescription));
 
                 case DONE:
-                    //if the number big than the input number throw error
                     return new DoneCommand(getTaskId(taskDescription));
 
                 case FIND:
@@ -62,21 +62,11 @@ public class Parser {
         catch (IllegalArgumentException e){
             ui.showNonZero();
         }
-
-        //check the 0 or negative
-//        catch(ArrayIndexOutOfBoundsException e){
-//            System.out.println("There are only "+"tasks.taskCount()"+" tasks, please enter the correct task number");
-//        }
-//        catch(IndexOutOfBoundsException e){
-//            System.out.println("todolist.data.task.Task number entered: "+"taskDescription"+" is invalid");
-//        }
-
         return new ContinueCommand();
     }
 
     public static Task createToDo(String fullCommand){
         Todo todo = new Todo(fullCommand);
-        todo.setTaskStatus("T");
         return todo;
     }
 
@@ -84,8 +74,11 @@ public class Parser {
     public static Task createEvent(String fullCommand){
         String[] eventAndTime = fullCommand.split("at");
         eventAndTime[0] = eventAndTime[0].replace(" /", "");
-        Event event = new Event(eventAndTime[0].trim(),eventAndTime[1].trim());
-        event.setTaskStatus("E");
+        String strDate = eventAndTime[1].trim();
+        if(!ParserDate.isDate(strDate)){
+            strDate = ParserDate.parseDate(strDate);
+        }
+        Event event = new Event(eventAndTime[0].trim(),strDate);
         return event;
     }
 
@@ -93,8 +86,11 @@ public class Parser {
     public static Task createDeadline(String fullCommand){
         String[] deadlineAndTime = fullCommand.split("by");
         deadlineAndTime[0] = deadlineAndTime[0].replace(" /", "");
-        Deadline deadline = new Deadline(deadlineAndTime[0].trim(),deadlineAndTime[1].trim());
-        deadline.setTaskStatus("D");
+        String strDate = deadlineAndTime[1].trim();
+        if(!ParserDate.isDate(strDate)){
+            strDate = ParserDate.parseDate(strDate);
+        }
+        Deadline deadline = new Deadline(deadlineAndTime[0].trim(),strDate);
         return deadline;
     }
 

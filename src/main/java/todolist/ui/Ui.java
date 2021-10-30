@@ -42,7 +42,7 @@ public class Ui {
      * @return true if the entire user input line should be ignored.
      */
 
-    private boolean shouldIgnore(String rawInputLine) {
+    static boolean shouldIgnore(String rawInputLine) {
         return rawInputLine.trim().isEmpty();
     }
 
@@ -86,7 +86,6 @@ public class Ui {
     public void showAddMessage(String message) {
         showToUser(ADD_PREFIX,message,getSuffix());
     }
-
     public void showDeleteMessage(String message) {
         showToUser(DELETE_PREFIX,message,getSuffix());
     }
@@ -116,7 +115,7 @@ public class Ui {
     }
 
 
-    public void showError(String errorMessage) {
+    public static void showError(String errorMessage) {
        System.out.println(errorMessage);
     }
 

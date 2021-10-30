@@ -12,8 +12,10 @@ public class Task {
     protected String description;
     protected boolean isDone;
     protected String taskStatus;
-    //TODO priority need to add to this object
+    protected String strDate;
+    protected String strTime;
 
+    //TODO priority need to add to this object
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -51,6 +53,15 @@ public class Task {
     public String getTime(){
         return "";
     }
+
+    public void setTime(String strTime){
+        this.strTime = strTime;
+    }
+
+    public void setDate(String strDate){
+        this.strDate = strDate;
+    }
+
 
 
     public String toString() {

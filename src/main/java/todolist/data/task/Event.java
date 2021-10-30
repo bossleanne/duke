@@ -14,12 +14,14 @@ public class Event extends Task {
 
     public Event(String description, String at) {
         super(description);
+        super.setTaskStatus("E");
         this.at = at;
     }
 
     public String getDescription() {
         return description;
     }
+
     public static String getAt(){
         return at;
     }

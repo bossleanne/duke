@@ -7,6 +7,7 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by) {
         super(description);
+        super.setTaskStatus("D");
         this.by = by;
     }
 
