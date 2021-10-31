@@ -20,20 +20,16 @@ public class DeleteCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage){
-        try{
-            if (doneId < 0){
-                throw new DukeException("Invalid number input");
-            } else
-            if(doneId >= tasks.taskCount()){
-                throw new DukeException("There are only "+tasks.taskCount()+" tasks, please enter the correct task number");
-            } else{
-                ui.setSize(tasks.taskCount()-1);
-                ui.showDeleteMessage(tasks.getTasks(doneId).toString());
-                tasks.deleteTask(doneId);
-            }
-        }catch ( DukeException e){
-            ui.showError(e.getMessage());
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+        if (doneId < 0){
+            throw new DukeException("Invalid number input");
+        } else
+        if(doneId >= tasks.taskCount()){
+            throw new DukeException(ui.outOfIndex(tasks.taskCount()));
+        } else{
+            ui.setSize(tasks.taskCount()-1);
+            ui.showDeleteMessage(tasks.getTasks(doneId).toString());
+            tasks.deleteTask(doneId);
         }
     }
 

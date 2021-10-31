@@ -26,7 +26,7 @@ public class Storage{
         this.filePath = filePath;
     }
 
-    public static void checkThePath() throws IOException {
+    public static void checkThePath() throws DukeException {
 
         f = new File(filePath);
         String tmpPath = f.getAbsolutePath();
@@ -44,55 +44,67 @@ public class Storage{
             newFile.mkdir();
         }
 
-        if (f.createNewFile()) {
+        try{
+            f.createNewFile();
             System.out.println(file + " has been created.");
+        }catch (IOException e){
+            throw new DukeException("File not found");
+
         }
     }
 
-    public static ArrayList<Task> load() throws IOException, DukeException {
+    public static ArrayList<Task> load() throws DukeException {
+        try {
+            ArrayList<Task> loadTasks = new ArrayList<>();
+            File f = new File(filePath);
+            Scanner s = new Scanner(f);
 
-        ArrayList<Task> loadTasks = new ArrayList<>();
-        File f = new File(filePath);
-        Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                String line = s.nextLine();
+                String[] components = line.split(" \\| ");
+                String taskStatus = components[0];
+                boolean isDone = getBooleanNum(components[1]);
+                String taskDescription = components[2];
+                Task loadTask;
 
-        while (s.hasNext()) {
-            String line = s.nextLine();
-            String[] components = line.split(" \\| ");
-            String taskStatus = components[0];
-            boolean isDone = getBooleanNum(components[1]);
-            String taskDescription = components[2];
-            Task loadTask;
-
-            switch (taskStatus) {
-                case "T":
-                    loadTask = Parser.createToDo(taskDescription);
-                    break;
-                case "E":
-                    loadTask = Parser.createEvent(taskDescription);
-                    break;
-                case "D":
-                    loadTask = Parser.createDeadline(taskDescription);
-                    break;
-                default:
-                    throw new DukeException("Unexpected value: " + taskStatus);
+                switch (taskStatus) {
+                    case "T":
+                        loadTask = Parser.createToDo(taskDescription);
+                        break;
+                    case "E":
+                        loadTask = Parser.createEvent(taskDescription);
+                        break;
+                    case "D":
+                        loadTask = Parser.createDeadline(taskDescription);
+                        break;
+                    default:
+                        throw new DukeException("Unexpected value: " + taskStatus);
+                }
+                loadTask.setIsDone(isDone);
+                loadTasks.add(loadTask);
             }
-            loadTask.setIsDone(isDone);
-            loadTasks.add(loadTask);
-        }
 
-        return loadTasks;
+            return loadTasks;
+        }catch (IOException e){
+            throw new DukeException(e.getMessage());
+        }
     }
 
-    public static void store(TaskList tasks) throws IOException {
-        checkThePath();
-        String textToAppend = "";
-        FileWriter fw = new FileWriter(filePath);
-        fw.write("");
-        fw.close();
-        for (Task task :tasks.tasks){
-            textToAppend = appendToFile(task);
-            writeToFile(filePath,textToAppend);
+    public static void store(TaskList tasks) throws DukeException {
+        try{
+            checkThePath();
+            String textToAppend = "";
+            FileWriter fw = new FileWriter(filePath);
+            fw.write("");
+            fw.close();
+            for (Task task :tasks.tasks){
+                textToAppend = appendToFile(task);
+                writeToFile(filePath,textToAppend);
+            }
+        }catch (IOException e){
+            throw new DukeException("File not found");
         }
+
     }
 
     private static void writeToFile(String filePath, String textToAppend) throws IOException {

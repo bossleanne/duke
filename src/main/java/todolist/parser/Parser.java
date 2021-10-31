@@ -3,6 +3,7 @@ package todolist.parser;
 import todolist.data.command.*;
 import todolist.data.task.*;
 import todolist.parser.time.ParserDate;
+import todolist.ui.DukeException;
 import todolist.ui.Ui;
 
 public class Parser {
@@ -11,7 +12,7 @@ public class Parser {
     public static Task t;
     public static Ui ui;
 
-    public static Command parse(String fullCommand){
+    public static Command parse(String fullCommand) throws DukeException {
         String line = fullCommand.stripTrailing();
         String[] taskSplit = line.split(" ",2);    //taskSplit[0] -> setTaskStatus
 
@@ -53,16 +54,17 @@ public class Parser {
                 case FIND:
                     s.setSearch(taskDescription);
                     return new SearchCommand();
+                default:
+                    return new HelpCommand();
                 }
             }
         }
         catch(ArrayIndexOutOfBoundsException e){
-            ui.showIncorrectInputs(taskStatus);
+            throw new DukeException(ui.showIncorrectIndex(taskStatus));
         }
         catch (IllegalArgumentException e){
-            ui.showNonZero();
+            throw new DukeException(ui.inValidInput());
         }
-        return new HelpCommand();
     }
 
     public static Task createToDo(String fullCommand){

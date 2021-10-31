@@ -22,7 +22,12 @@ public class ListCommand extends Command{
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showToUserAllTasks(tasks);
+        if(tasks.taskCount()>0){
+            ui.showToUserAllTasks(tasks);
+        }else{
+            ui.showEmptyTask();
+        }
+
     }
 
     @Override

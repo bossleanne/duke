@@ -20,19 +20,15 @@ public class DoneCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        try{
-            if (doneId < 0){
-                throw new DukeException("Invalid number input");
-            } else
-            if(doneId >= tasks.taskCount()){
-                throw new DukeException("There are only "+tasks.taskCount()+" tasks, please enter the correct task number");
-            } else{
-                tasks.finishTask(doneId);
-                ui.showModifyMessage(tasks.getTasks(doneId).toString());
-            }
-        }catch ( DukeException e){
-            ui.showError(e.getMessage());
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+        if (doneId < 0){
+            throw new DukeException("Invalid number input");
+        } else
+        if(doneId >= tasks.taskCount()){
+            throw new DukeException(ui.outOfIndex(tasks.taskCount()));
+        } else{
+            tasks.finishTask(doneId);
+            ui.showModifyMessage(tasks.getTasks(doneId).toString());
         }
     }
 

@@ -2,9 +2,8 @@ package todolist.data.command;
 
 import todolist.data.TaskList;
 import todolist.storage.Storage;
+import todolist.ui.DukeException;
 import todolist.ui.Ui;
-
-import java.io.IOException;
 
 //todo Load the App with some sample data at the first run.
 public class HelpCommand extends Command {
@@ -16,13 +15,8 @@ public class HelpCommand extends Command {
 
 
     public HelpCommand() {
-
-    }
-
-    @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         String instruction =
-                          "    ________________________________________________________________________________\n"
+                "    ________________________________________________________________________________\n"
                         + "   |                            Todolist usage instructions:                        |\n"
                         + "   |________________________________________________________________________________|";
         System.out.println(
@@ -34,5 +28,9 @@ public class HelpCommand extends Command {
                         + "\n" + ListCommand.MESSAGE_USAGE
                         + "\n" + ExitCommand.MESSAGE_USAGE
         );
+    }
+
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
     }
 }

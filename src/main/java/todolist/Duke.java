@@ -7,8 +7,6 @@ import todolist.storage.Storage;
 import todolist.ui.DukeException;
 import todolist.ui.Ui;
 
-import java.io.IOException;
-
 public class Duke {
     public TaskList tasks;
     public Storage storage;
@@ -19,7 +17,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (IOException | DukeException e) {
+        } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -35,7 +33,7 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            } catch (IOException e) {
+            } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } finally {
                 ui.showLine();

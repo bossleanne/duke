@@ -2,9 +2,8 @@ package todolist.data.command;
 
 import todolist.data.TaskList;
 import todolist.storage.Storage;
+import todolist.ui.DukeException;
 import todolist.ui.Ui;
-
-import java.io.IOException;
 
 public class SearchCommand extends Command{
 
@@ -27,7 +26,7 @@ public class SearchCommand extends Command{
 
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
 
         TaskList result = new TaskList();
         boolean isFound = false;
@@ -41,6 +40,7 @@ public class SearchCommand extends Command{
         if (!isFound){
             System.out.println("No matching tasks in your list, please try other keywords ");
         }else{
+            ui.showSearchMessage();
             ui.showToUserAllTasks(result);
         }
 

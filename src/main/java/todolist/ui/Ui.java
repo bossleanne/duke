@@ -29,13 +29,10 @@ public class Ui {
     public void greeting(){
         System.out.println(
                 showLine()
-                        + "Hello! Are you ready to start your day?\n"
-                        + "Enter today's task: \n"
-                        +"([help]: view instructions)\n"
-                        + showLine());
-    }
-    public void getHelp(){
+                        + " Hello! I'm Duke todolist apps, are you ready to start your day?\n"
+                        + " Here are the usage of this application: \n");
         new HelpCommand();
+        System.out.println(showLine());
     }
 
     /**
@@ -81,10 +78,7 @@ public class Ui {
     }
 
     public void showGoodbyeMessage() {
-        System.out.println(
-                showLine()
-                        + MESSAGE_GOODBYE+"\n"
-                        + showLine());
+        System.out.println(showLine() + MESSAGE_GOODBYE+"\n" + showLine());
     }
 
     public void showAddMessage(String message) {
@@ -107,11 +101,13 @@ public class Ui {
         );
     }
 
+    public void showSearchMessage() {
+        System.out.println(MESSAGE_SEARCH);
+    }
+
     public void showToUserAllTasks(TaskList taskList){
 
         System.out.print(DASHES);
-        System.out.println(MESSAGE_SEARCH);
-
         for(int i = 0; i< taskList.taskCount();i++){
             System.out.println(i+1 + "."+taskList.getTasks(i).toString());
         }
@@ -124,24 +120,29 @@ public class Ui {
     }
 
     public void showLoadingError(){
-        System.out.println("No tasks file found, process to take new tasks");
+        System.out.println( DASHES + ERROR_PREFIX+"No tasks file found, process to take new tasks\n"+DASHES);
     }
 
-    public static void showIncorrectInputs(String taskStatus){
-        System.out.println(
-                DASHES
-                        + ERROR_PREFIX
+    public void showEmptyTask(){
+        System.out.println( DASHES + ERROR_PREFIX+"No tasks in the list, process to take new tasks\n"+DASHES);
+    }
+
+    public static String showIncorrectIndex(String taskStatus){
+        return DASHES + ERROR_PREFIX
                         +"The description of a "+taskStatus+" cannot be empty.\n"
-                        +DASHES
-        );
+                        +DASHES;
+
     }
 
-    public static void showNonZero(){
-        System.out.println(
-                DASHES
-                        + ERROR_PREFIX
+    public static String inValidInput(){
+        return DASHES + ERROR_PREFIX
                         +" I'm sorry, but I don't know what that means :-(\n"
-                        +DASHES
-        );
+                        +DASHES;
+    }
+
+    public static String outOfIndex(int taskCount){
+       return DASHES + ERROR_PREFIX
+                        +"There are only "+taskCount+" tasks, please enter the correct task index\n"
+                        +DASHES;
     }
 }

@@ -3,6 +3,7 @@ package todolist.data.command;
 import todolist.data.TaskList;
 import todolist.data.task.Task;
 import todolist.storage.Storage;
+import todolist.ui.DukeException;
 import todolist.ui.Ui;
 
 import java.io.IOException;
@@ -22,7 +23,7 @@ public class ExitCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         storage.store(tasks);
         ui.showGoodbyeMessage();
     }
