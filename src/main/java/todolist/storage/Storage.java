@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
+//todo store as daily to using daily date as file name, loaded from previous
 public class Storage{
 
     public static String filePath;
@@ -39,9 +39,9 @@ public class Storage{
 
         //check the validity of the path
         if (!Files.isDirectory(Paths.get(path))) {
-            File newfile = new File(path);
+            File newFile = new File(path);
             System.out.println(f.getParent() + " has has been created");
-            newfile.mkdir();
+            newFile.mkdir();
         }
 
         if (f.createNewFile()) {

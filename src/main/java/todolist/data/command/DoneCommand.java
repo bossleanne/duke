@@ -7,12 +7,13 @@ import todolist.ui.Ui;
 
 public class DoneCommand extends Command{
 
-    public static final String COMMAND_WORD = "done";
+    public static final String COMMAND_WORD = "Done";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Make the task as done identified by the index number used in the todolist listing.\n"
-            + "Parameters: INDEX\n"
-            + "Example: " + COMMAND_WORD + " 1";
+    public static final String MESSAGE_USAGE =
+            String.format("    %-11s: %s\n" , COMMAND_WORD, "Make the task as done identified by the index number used in the todolist listing." )
+                    + String.format("    %-11s: %s\n" , "Parameters", "INDEX" )
+                    + String.format("    %-11s: %s\n" , "Example",  COMMAND_WORD.toLowerCase() + " 1");
+
 
     public DoneCommand(int doneId) {
         super(doneId);

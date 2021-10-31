@@ -9,10 +9,13 @@ import java.io.IOException;
 
 public class ExitCommand extends Command{
 
-    public static final String COMMAND_WORD = "bye";
+    public static final String COMMAND_WORD = "Exit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exits the program.\n"
-            + "Example: " + COMMAND_WORD;
+    public static final String MESSAGE_USAGE =
+            String.format("    %-11s: %s\n" , COMMAND_WORD, "Exits the program." )
+                    + String.format("    %-11s: %s\n" , "Parameters", "" )
+                    + String.format("    %-11s: %s\n" , "Example",  "bye");
+
 
     public ExitCommand(Task task) {
         super(task);

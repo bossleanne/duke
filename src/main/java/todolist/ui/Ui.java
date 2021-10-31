@@ -1,13 +1,13 @@
 package todolist.ui;
 
 import todolist.data.TaskList;
+import todolist.data.command.HelpCommand;
 
 import java.util.Scanner;
 
 public class Ui {
     private static String DASHES =
-            "----------------------------------------"
-            + "----------------------------------------\n";
+            "________________________________________________________________________________\n";
 
     private static String ADD_PREFIX = "Got it. I've added this task: ";
     private static String DELETE_PREFIX = "Noted. I've removed this task: ";
@@ -31,7 +31,11 @@ public class Ui {
                 showLine()
                         + "Hello! Are you ready to start your day?\n"
                         + "Enter today's task: \n"
+                        +"([help]: view instructions)\n"
                         + showLine());
+    }
+    public void getHelp(){
+        new HelpCommand();
     }
 
     /**

@@ -62,7 +62,7 @@ public class Parser {
         catch (IllegalArgumentException e){
             ui.showNonZero();
         }
-        return new ContinueCommand();
+        return new HelpCommand();
     }
 
     public static Task createToDo(String fullCommand){

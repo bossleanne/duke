@@ -7,12 +7,13 @@ import todolist.ui.Ui;
 
 public class DeleteCommand extends Command{
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "Delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the task identified by the index number used in the todolist listing.\n"
-            + "Parameters: INDEX\n"
-            + "Example: " + COMMAND_WORD + " 1";
+    public static final String MESSAGE_USAGE =
+            String.format("    %-11s: %s\n" , COMMAND_WORD, "Delete the task identified by the index number used in the todolist listing " )
+            + String.format("    %-11s: %s\n" , "Parameters", "INDEX" )
+            + String.format("    %-11s: %s\n" , "Example",  COMMAND_WORD.toLowerCase() + " 1");
+
 
     public DeleteCommand(int doneId) {
         super(doneId);

@@ -18,12 +18,12 @@ public class SearchCommand extends Command{
         return search;
     }
 
-    public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_WORD = "Find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": book "
-            + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: Single String Keyword ...\n"
-            + "Example: " + COMMAND_WORD + " book";
+    public static final String MESSAGE_USAGE =
+            String.format("    %-11s: %s\n" , COMMAND_WORD, "the specified keywords (case-sensitive) and displays them as a list with index numbers." )
+                    + String.format("    %-11s: %s\n" , "Parameters", "Single String Keyword" )
+                    + String.format("    %-11s: %s\n" , "Example",  COMMAND_WORD.toLowerCase() + " book");
 
 
     @Override

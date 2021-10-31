@@ -4,6 +4,9 @@ import todolist.data.TaskList;
 import todolist.storage.Storage;
 import todolist.ui.Ui;
 
+import java.io.IOException;
+
+//todo Load the App with some sample data at the first run.
 public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
@@ -11,15 +14,20 @@ public class HelpCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
             + "Example: " + COMMAND_WORD;
 
+
     public HelpCommand() {
 
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage){
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+        String instruction =
+                          "    ________________________________________________________________________________\n"
+                        + "   |                            Todolist usage instructions:                        |\n"
+                        + "   |________________________________________________________________________________|";
         System.out.println(
-                HelpCommand.MESSAGE_USAGE
-                        + "\n" +AddCommand.MESSAGE_USAGE
+                instruction
+                        + "\n" + AddCommand.MESSAGE_USAGE
                         + "\n" + DeleteCommand.MESSAGE_USAGE
                         + "\n" + DoneCommand.MESSAGE_USAGE
                         + "\n" + SearchCommand.MESSAGE_USAGE
