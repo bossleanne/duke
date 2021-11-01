@@ -1,6 +1,7 @@
 package todolist.data.task;
-
-
+/**
+ * Represents a todo task in the TodoList
+ */
 public class Todo extends Task {
     protected boolean isDone;
 
@@ -9,17 +10,4 @@ public class Todo extends Task {
         super.setTaskStatus("T");
         isDone = false;
     }
-
-    public void setDone(boolean done) {
-        isDone = done;
-    }
-
-    public boolean isDone() {
-        return isDone;
-    }
-
-//    @Override
-//    public String toString() {
-//        return super.toString();
-//    }
 }

@@ -4,20 +4,15 @@ import todolist.data.TaskList;
 import todolist.storage.Storage;
 import todolist.ui.DukeException;
 import todolist.ui.Ui;
-
-//todo Load the App with some sample data at the first run.
+/**
+ * Display TodoList usage instructions
+ */
 public class HelpCommand extends Command {
-
-    public static final String COMMAND_WORD = "help";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
-            + "Example: " + COMMAND_WORD;
-
 
     public HelpCommand() {
         String instruction =
                 "    ________________________________________________________________________________\n"
-                        + "   |                            Todolist usage instructions:                        |\n"
+                        + "   |                            TodoList usage instructions:                        |\n"
                         + "   |________________________________________________________________________________|";
         System.out.println(
                 instruction
@@ -29,7 +24,6 @@ public class HelpCommand extends Command {
                         + "\n" + ExitCommand.MESSAGE_USAGE
         );
     }
-
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
     }

@@ -1,13 +1,8 @@
 package todolist.data.task;
 
-/********
- * Created by IntelliJ IDEA.
- * User: Leanne.Sun
- * Date: 19/9/21
- * Time: 10:28 am
- * All rights reserved.
+/**
+ * Represents an Event task in the TodoList
  */
-
 public class Event extends Task {
 
     protected static String at;
@@ -15,22 +10,25 @@ public class Event extends Task {
     public Event(String description, String at) {
         super(description);
         super.setTaskStatus("E");
-        this.at = at;
+        Event.at = at;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public static String getAt(){
-        return at;
-    }
-
+    /**
+     * Override the toString method in parents
+     * @return time string
+     */
     @Override
     public String getTime(){
         return at;
     }
-
+    /**
+     * Override the toString method in parents
+     * @return a string of show content arranged in a formatted way
+     */
     @Override
     public String toString() {
         return super.toString() + " (at: " + getTime() + ")";

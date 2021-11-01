@@ -1,34 +1,29 @@
 package todolist.data.task;
 
-
+/**
+ * Represents a Deadline task in the TodoList
+ */
 public class Deadline extends Task {
 
-    public static String by;
+    protected static String by;
 
     public Deadline(String description, String by) {
         super(description);
         super.setTaskStatus("D");
-        this.by = by;
+        Deadline.by = by;
     }
-
-
+    /**
+     * Override the toString method in parents
+     * @return time string
+     */
     @Override
     public String getTime(){
         return by;
     }
-
-//    public static LocalDate strToDate(String date){
-
-//        System.out.println();
-
-        //conditions -
-        // date 2/12/2019 || yyyy-mm-dd
-        // date + time  2/12/2019 1800 ,
-        // days mon tue || monday tuesday
-        // days + time mon 3pm || mon 1500
-        //
-//    }
-
+    /**
+     * Override the toString method in parents
+     * @return a string of show content arranged in a formatted way
+     */
     @Override
     public String toString() {
         return super.toString() + " (by: " + getTime() + ")";

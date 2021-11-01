@@ -1,69 +1,52 @@
 package todolist.data.task;
-
-/********
- * Created by IntelliJ IDEA.
- * User: Leanne.Sun
- * Date: 19/9/21
- * Time: 10:28 am
- * All rights reserved.
+/**
+ * Abstract Task in the TodoList
  */
-
 public class Task {
     protected String description;
     protected boolean isDone;
     protected String taskStatus;
-    protected String strDate;
-    protected String strTime;
 
-    //TODO priority need to add to this object
     public Task(String description) {
         this.description = description;
         this.isDone = false;
         this.taskStatus=" ";
     }
 
+    /**
+     * Getters and setters to access to the Task object
+     */
     public String getDescription() {
         return description;
     }
-
-    public void setIsDone(boolean done){
-        this.isDone = done;
+    public String getTaskStatus(){
+        return taskStatus;
+    }
+    public String getTime(){
+        return "";
     }
 
     public boolean getIsDone(){
         return this.isDone;
     }
-
-    public void setTaskStatus(String status){
-        this.taskStatus = status;
+    public void setIsDone(boolean done){
+        this.isDone = done;
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " ");
     }
-
-    public String getTaskStatus(){
-        return taskStatus;
+    public void setTaskStatus(String status){
+        this.taskStatus = status;
     }
 
     public void markAsDone(){
         setIsDone(true);
     }
-
-    public String getTime(){
-        return "";
-    }
-
-    public void setTime(String strTime){
-        this.strTime = strTime;
-    }
-
-    public void setDate(String strDate){
-        this.strDate = strDate;
-    }
-
-
-
+    /**
+     * Override the toString method in parents
+     * @return a string of show content arranged in a formatted way
+     */
     public String toString() {
         return "["+getTaskStatus()+"]"+"["+getStatusIcon()+"] "+getDescription();
     }
