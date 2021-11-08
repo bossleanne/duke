@@ -25,9 +25,7 @@ public class DeleteCommand extends Command{
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
-        if (doneId < 0){
-            throw new DukeException("Invalid number input");
-        } else
+        assert(doneId > 0);
         if(doneId >= tasks.taskCount()){
             throw new DukeException(Ui.outOfIndex(tasks.taskCount()));
         } else{

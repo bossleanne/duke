@@ -10,7 +10,7 @@ public class Event extends Task {
     public Event(String description, String at) {
         super(description);
         super.setTaskStatus("E");
-        Event.at = at;
+        this.at = at;
     }
 
     public String getDescription() {

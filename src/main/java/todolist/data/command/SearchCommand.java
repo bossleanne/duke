@@ -42,7 +42,7 @@ public class SearchCommand extends Command{
             }
         }
         if (!isFound){
-            System.out.println("No matching tasks in your list, please try other keywords ");
+            ui.showError("No matching tasks in your list, please try other keywords ");
         }else{
             ui.showSearchMessage();
             ui.showToUserAllTasks(result);

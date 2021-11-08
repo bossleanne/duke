@@ -19,7 +19,7 @@ public class Ui {
     /**Prefix used to add to the beginning of lines printed by TodoList when uppdate task */
     private static final String DONE_PREFIX = "Nice! I've marked this task as done: ";
     /**Suffix used to add to the end of lines printed by TodoList*/
-    private static final String TASK_SUFFIX = ("Now you have "+"%1$d"+" tasks in the list.");
+    private static final String TASK_SUFFIX = ("\nNow you have "+"%1$d"+" tasks in the list.");
     /**Prefix used to add to the end of lines printed by TodoList when encounter error*/
     private static final String ERROR_PREFIX = "☹ OOPS!!! ";
     private static final String MESSAGE_SEARCH = "Here are the matching tasks in your list:";
@@ -71,12 +71,16 @@ public class Ui {
         System.out.println(DASHES);
     }
     public void showGoodbyeMessage() {
-        System.out.println(DASHES + MESSAGE_GOODBYE+"\n" + DASHES);
+        System.out.println(DASHES + MESSAGE_GOODBYE+"\n");
+    }
+    public static void showMessage(String commonMessage) {
+        System.out.println(DASHES+commonMessage);
     }
     /**
      * Display the result when take command execution from the user.
      */
     public void showAddMessage(String message) {
+//        showToUser(ADD_PREFIX,message,getSuffix());
         showToUser(ADD_PREFIX,message,getSuffix());
     }
     public void showDeleteMessage(String message) {
@@ -91,8 +95,8 @@ public class Ui {
     public void showLine() {System.out.println(DASHES);}
 
     /** Shows different error message(s) to the user when {@code DukeException} is triggered*/
-    public static void showError(String errorMessage) {
-        System.out.println(DASHES + ERROR_PREFIX+errorMessage+"\n"+DASHES);
+    public void showError(String errorMessage) {
+        System.out.println(DASHES + ERROR_PREFIX+errorMessage);
     }
     public void showLoadingError(){
         System.out.println( DASHES + ERROR_PREFIX+"No tasks file found, process to take new tasks\n"+DASHES);
@@ -101,7 +105,7 @@ public class Ui {
         return "The description of a "+taskStatus+" cannot be empty.";
     }
     public void showEmptyTask(){
-        System.out.println( DASHES + ERROR_PREFIX+"No tasks in the list, process to take new tasks\n"+DASHES);
+        System.out.println( DASHES + ERROR_PREFIX+"No tasks in the list, process to take new tasks");
     }
     public static String inValidInput(){
         return " I'm sorry, but I don't know what that means :-(";
@@ -118,9 +122,9 @@ public class Ui {
     public void showToUser(String Prefix, String Message, String Suffix) {
         System.out.println(DASHES
                         +Prefix + "\n"
-                        +Message +"\n"
-                        +Suffix + "\n"
-                        +DASHES);
+                        +Message
+                        +Suffix
+                        );
     }
     /** Shows a list of tasks to the user, formatted as an indexed list.
      *  Formats a string as a viewable indexed list item.
@@ -130,6 +134,5 @@ public class Ui {
         for(int i = 0; i< taskList.taskCount();i++){
             System.out.println(i+1 + "."+taskList.getTasks(i).toString());
         }
-        System.out.println(DASHES);
     }
 }

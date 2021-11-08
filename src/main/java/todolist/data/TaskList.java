@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class TaskList {
 
-    public ArrayList<Task> tasks = new ArrayList<>();
+    public ArrayList<Task> tasks = new ArrayList<Task>();
     /**
      * Initiate an empty todolist tasks
      */

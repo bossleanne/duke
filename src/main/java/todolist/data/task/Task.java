@@ -1,6 +1,6 @@
 package todolist.data.task;
 /**
- * Abstract Task in the TodoList
+ * Represents Task in the TodoList
  */
 public class Task {
     protected String description;

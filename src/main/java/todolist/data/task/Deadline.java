@@ -10,7 +10,7 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         super.setTaskStatus("D");
-        Deadline.by = by;
+        this.by = by;
     }
     /**
      * Override the toString method in parents
