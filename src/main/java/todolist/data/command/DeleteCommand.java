@@ -25,6 +25,9 @@ public class DeleteCommand extends Command{
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+        /**
+         * Break the execution if user trying to delete a non-exist task
+         */
         assert(doneId > 0);
         if(doneId >= tasks.taskCount()){
             throw new DukeException(Ui.outOfIndex(tasks.taskCount()));
