@@ -64,9 +64,16 @@ public class Ui {
      * Prints welcome messages at the start of the application.
      */
     public void greeting(){
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+//        System.out.println("Hello from\n" + logo);
         System.out.println(DASHES
+                + logo
                 + " Hello! I'm Duke todolist apps, are you ready to start your day?\n"
-                + " Here are the usage of this application: \n");
+                + " Here are the usage of this application:");
         new HelpCommand();
         System.out.println(DASHES);
     }

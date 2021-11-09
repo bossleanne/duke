@@ -19,23 +19,20 @@ public class DeleteCommand extends Command{
             + String.format("    %-11s: %s\n" , "Example",  COMMAND_WORD.toLowerCase() + " 1");
 
 
-    public DeleteCommand(int doneId) {
-        super(doneId);
+    public DeleteCommand(int taskId) {
+        super(taskId);
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
         /**
-         * Break the execution if user trying to delete a non-exist task
+         * Break the execution if user trying to delete a task id that not exist in list
          */
-        assert(doneId > 0);
-        if(doneId >= tasks.taskCount()){
-            throw new DukeException(Ui.outOfIndex(tasks.taskCount()));
-        } else{
-            ui.setSize(tasks.taskCount()-1);
-            ui.showDeleteMessage(tasks.getTasks(doneId).toString());
-            tasks.deleteTask(doneId);
-        }
+        assert(taskId > 0);
+        assert(taskId <tasks.taskCount());
+        ui.setSize(tasks.taskCount()-1);
+        ui.showDeleteMessage(tasks.getTasks(taskId).toString());
+        tasks.deleteTask(taskId);
     }
 
     @Override

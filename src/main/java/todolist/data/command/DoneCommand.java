@@ -20,20 +20,20 @@ public class DoneCommand extends Command{
                     + String.format("    %-11s: %s\n" , "Example",  COMMAND_WORD.toLowerCase() + " 1");
 
 
-    public DoneCommand(int doneId) {
-        super(doneId);
+    public DoneCommand(int taskId) {
+        super(taskId);
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
-        if (doneId < 0){
+        if (taskId < 0){
             throw new DukeException("Invalid number input");
         } else
-        if(doneId >= tasks.taskCount()){
+        if(taskId >= tasks.taskCount()){
             throw new DukeException(Ui.outOfIndex(tasks.taskCount()));
         } else{
-            tasks.finishTask(doneId);
-            ui.showModifyMessage(tasks.getTasks(doneId).toString());
+            tasks.finishTask(taskId);
+            ui.showModifyMessage(tasks.getTasks(taskId).toString());
         }
     }
 

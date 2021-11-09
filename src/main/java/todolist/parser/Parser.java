@@ -10,7 +10,7 @@ import todolist.ui.Ui;
 public class Parser {
     public static Task t;
     public static Ui ui;
-
+    static ParserDate p = new ParserDate();
     /**
      * Parses user input into command for execution.
      * @param fullCommand get the full line of user input string
@@ -82,7 +82,11 @@ public class Parser {
             String[] eventAndTime = fullCommand.split("at");
             eventAndTime[0] = eventAndTime[0].replace(" /", "");
             String strDateTime = eventAndTime[1].trim();
-            strDateTime = ParserDate.parseDate(strDateTime);
+            if(p.isLogDate(strDateTime)){
+                strDateTime = p.parseStoredDate(strDateTime);
+            }else{
+                strDateTime = p.parseDate(strDateTime);
+            }
             return new Event(eventAndTime[0].trim(), strDateTime);
         }catch (ArrayIndexOutOfBoundsException e){
             throw new DukeException("No date or time founded, please re-enter");
@@ -99,7 +103,6 @@ public class Parser {
             String[] deadlineAndTime = fullCommand.split("by");
             deadlineAndTime[0] = deadlineAndTime[0].replace(" /", "");
             String strDateTime = deadlineAndTime[1].trim();
-            ParserDate p = new ParserDate();
             if(p.isLogDate(strDateTime)){
                 strDateTime = p.parseStoredDate(strDateTime);
             }else{

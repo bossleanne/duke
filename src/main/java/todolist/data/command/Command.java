@@ -11,7 +11,7 @@ import todolist.ui.Ui;
 public abstract class Command {
 
     protected Task task;
-    protected int doneId;
+    protected int taskId;
     /**
      * Initiate a Command object
      */
@@ -19,10 +19,10 @@ public abstract class Command {
 
     }
     /**
-     * @param doneId listing index of the task
+     * @param taskId listing index of the task
      */
-    public Command(int doneId) {
-        this.doneId = doneId;
+    public Command(int taskId) {
+        this.taskId = taskId;
     }
 
     /**

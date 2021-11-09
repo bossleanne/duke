@@ -28,20 +28,20 @@ public class TaskList {
     /**
      * Deleting a task to the TaskList
      */
-    public void deleteTask(int doneId){
-        tasks.remove(doneId);
+    public void deleteTask(int taskId){
+        tasks.remove(taskId);
     }
     /**
      * Updating a task to the TaskList
      */
-    public void finishTask(int doneId){
-        tasks.get(doneId).markAsDone();
+    public void finishTask(int taskId){
+        tasks.get(taskId).markAsDone();
     }
     /**
      * Getting a task to the TaskList
      */
-    public Task getTasks(Integer doneId){
-        return tasks.get(doneId);
+    public Task getTasks(int taskId){
+        return tasks.get(taskId);
     }
     /**
      * Counting how many tasks inside the TaskList
