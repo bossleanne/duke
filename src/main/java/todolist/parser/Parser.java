@@ -89,11 +89,10 @@ public class Parser {
             String[] eventAndTime = fullCommand.split("at");
             eventAndTime[0] = eventAndTime[0].replace(" /", "");
             String strDateTime = eventAndTime[1].trim();
-            if(isLoadedTask){
-                strDateTime = p.parseStoredDate(strDateTime);
-                isLoadedTask = false;
-            }else{
+            if(!isLoadedTask){
                 strDateTime = p.parseDate(strDateTime);
+            } else{
+                isLoadedTask = false;
             }
             return new Event(eventAndTime[0].trim(), strDateTime);
         }catch (ArrayIndexOutOfBoundsException e){
@@ -111,11 +110,10 @@ public class Parser {
             String[] deadlineAndTime = fullCommand.split("by");
             deadlineAndTime[0] = deadlineAndTime[0].replace(" /", "");
             String strDateTime = deadlineAndTime[1].trim();
-            if(isLoadedTask){
-                strDateTime = p.parseStoredDate(strDateTime);
-                isLoadedTask = false;
-            }else{
+            if(!isLoadedTask){
                 strDateTime = p.parseDate(strDateTime);
+            } else{
+                isLoadedTask = false;
             }
             return new Deadline(deadlineAndTime[0].trim(),strDateTime);
         }catch (ArrayIndexOutOfBoundsException e){

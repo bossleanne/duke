@@ -82,63 +82,6 @@ public class ParserDate {
     }
 
     /**
-     * Parses storage date input
-     * @param input get the date and time string
-     * @return a new date format string that rejoin the date and time
-     * @throws DukeException for invalid date and time input
-     */
-    public String parseStoredDate(String input){
-        String temp = "";
-        if(input.contains(",")){
-            String[] newDateTime = input.split(",");
-            newDateTime[0] = convertDateToStr(newDateTime[0]);
-            newDateTime[1] = convertTimeToStr(newDateTime[1]);
-            return String.join(" ", newDateTime);
-        }else{
-            if (isStoreStrTime(input)){
-                temp = convertTimeToStr(input);
-            } else{
-                temp = convertDateToStr(input);
-            }
-            return temp;
-        }
-    }
-    /**
-     * Convert the time string from stored list
-     */
-    public boolean isStoreStrTime(String timeStr){
-        String regexTime = "\\d{1,2}\\:\\d{1,2}";
-        String strTime = getMatch(timeStr,regexTime);
-        if(strTime.equals("-1")){
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Convert the date string from user input to a new format
-     * @param dateStr string as MMM dd yyyy format
-     * @return date string as d/M/yyyy format
-     */
-    public String convertDateToStr(String dateStr) {
-        DateTimeFormatter newformat = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        LocalDate dateTime = LocalDate.parse(dateStr,newformat);
-        DateTimeFormatter newReFormat = DateTimeFormatter.ofPattern("d/M/yyyy");
-        return dateTime.format(newReFormat);
-    }
-    /**
-     * Convert the time string from user input to a new format
-     * @param timeStr string as h:mm format
-     * @return time string HHmm a format
-     */
-    public String convertTimeToStr(String timeStr) {
-        DateTimeFormatter timeformat = DateTimeFormatter.ofPattern("h:mm a");
-        LocalTime dateTime = LocalTime.parse(timeStr,timeformat);
-        DateTimeFormatter reFormat = DateTimeFormatter.ofPattern("HHmm");
-        return dateTime.format(reFormat);
-    }
-
-    /**
      * A match function to match the regex and user input
      * @param input matcher in string
      * @param regex pattern in string
