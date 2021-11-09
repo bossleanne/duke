@@ -78,7 +78,7 @@ public class Ui {
         System.out.println(DASHES);
     }
     public void showGoodbyeMessage() {
-        System.out.println(DASHES + MESSAGE_GOODBYE+"\n");
+        System.out.println(DASHES + MESSAGE_GOODBYE);
     }
     public static void showMessage(String commonMessage) {
         System.out.println(DASHES+commonMessage);

@@ -10,7 +10,13 @@ import todolist.ui.Ui;
 public class Parser {
     public static Task t;
     public static Ui ui;
-    static ParserDate p = new ParserDate();
+    public static ParserDate p = new ParserDate();
+    private static boolean isLoadedTask = false;
+
+    public static void setLoadedTask(){
+        isLoadedTask = true;
+    }
+
     /**
      * Parses user input into command for execution.
      * @param fullCommand get the full line of user input string
@@ -63,6 +69,7 @@ public class Parser {
             throw new DukeException(Ui.inValidInput());
         }
     }
+
     /**
      * Generate new TODO task
      * @param fullCommand get the full description of todo string
@@ -82,8 +89,9 @@ public class Parser {
             String[] eventAndTime = fullCommand.split("at");
             eventAndTime[0] = eventAndTime[0].replace(" /", "");
             String strDateTime = eventAndTime[1].trim();
-            if(p.isLogDate(strDateTime)){
+            if(isLoadedTask){
                 strDateTime = p.parseStoredDate(strDateTime);
+                isLoadedTask = false;
             }else{
                 strDateTime = p.parseDate(strDateTime);
             }
@@ -103,8 +111,9 @@ public class Parser {
             String[] deadlineAndTime = fullCommand.split("by");
             deadlineAndTime[0] = deadlineAndTime[0].replace(" /", "");
             String strDateTime = deadlineAndTime[1].trim();
-            if(p.isLogDate(strDateTime)){
+            if(isLoadedTask){
                 strDateTime = p.parseStoredDate(strDateTime);
+                isLoadedTask = false;
             }else{
                 strDateTime = p.parseDate(strDateTime);
             }

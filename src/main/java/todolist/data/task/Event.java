@@ -5,7 +5,7 @@ package todolist.data.task;
  */
 public class Event extends Task {
 
-    protected static String at;
+    protected String at;
 
     public Event(String description, String at) {
         super(description);

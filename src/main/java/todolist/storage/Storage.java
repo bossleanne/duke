@@ -5,13 +5,13 @@ import todolist.data.task.Task;
 import todolist.parser.Parser;
 import todolist.ui.DukeException;
 
-import java.io.IOException;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Represents the file used to store todo list data
@@ -42,13 +42,14 @@ public class Storage{
 
         if (!Files.isDirectory(Paths.get(path))) {
             File newFile = new File(path);
-            System.out.println(f.getParent() + " has has been created");
+//            System.out.println(f.getParent() + " has has been created");
             newFile.mkdir();
         }
 
         try{
             f.createNewFile();
-            System.out.println(file + " has been created.");
+//            Ui.showMessage(file + " has been created.");
+//            System.out.println();
         }catch (IOException e){
             throw new DukeException("File not found");
 
@@ -71,6 +72,7 @@ public class Storage{
                 boolean isDone = getBooleanNum(components[1]);
                 String taskDescription = components[2];
                 Task loadTask;
+                Parser.setLoadedTask();
 
                 switch (taskStatus) {
                 case "T":
