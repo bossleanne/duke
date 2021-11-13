@@ -10,7 +10,7 @@ import todolist.ui.Ui;
 public class DoneCommand extends Command{
 
     public static final String COMMAND_WORD = "Done";
-
+    public static int tempDone;
     /**
      * Shows the usage of done
      */
@@ -22,18 +22,21 @@ public class DoneCommand extends Command{
 
     public DoneCommand(int taskId) {
         super(taskId);
+        this.tempDone = taskId;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
-        if (taskId < 0){
-            throw new DukeException("Invalid number input");
-        } else
-        if(taskId >= tasks.taskCount()){
+//        assert(tasks.getTasks(taskId).getIsDone()==true);
+        if(tasks.getTasks(taskId).getIsDone()){
+            throw new DukeException("Task "+taskId+1+" already marked as done, re-enter new task ID");
+        }
+       if(taskId >= tasks.taskCount()){
             throw new DukeException(Ui.outOfIndex(tasks.taskCount()));
         } else{
             tasks.finishTask(taskId);
             ui.showModifyMessage(tasks.getTasks(taskId).toString());
+            storage.logCommand("done");
         }
     }
 

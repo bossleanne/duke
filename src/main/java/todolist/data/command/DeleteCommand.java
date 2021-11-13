@@ -1,6 +1,7 @@
 package todolist.data.command;
 
 import todolist.data.TaskList;
+import todolist.data.task.Task;
 import todolist.storage.Storage;
 import todolist.ui.DukeException;
 import todolist.ui.Ui;
@@ -10,6 +11,7 @@ import todolist.ui.Ui;
 public class DeleteCommand extends Command{
 
     public static final String COMMAND_WORD = "Delete";
+    public static Task tempDelete;
     /**
      * Shows the usage of delete
      */
@@ -28,11 +30,12 @@ public class DeleteCommand extends Command{
         /**
          * Break the execution if user trying to delete a task id that not exist in list
          */
-        assert(taskId > 0);
-        assert(taskId <tasks.taskCount());
+        assert(taskId < tasks.taskCount());
+        tempDelete = tasks.getTasks(taskId);
         ui.setSize(tasks.taskCount()-1);
         ui.showDeleteMessage(tasks.getTasks(taskId).toString());
         tasks.deleteTask(taskId);
+        storage.logCommand("delete");
     }
 
     @Override

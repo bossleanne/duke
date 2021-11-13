@@ -25,6 +25,7 @@ public class Storage{
     public static File f;
     public static String textToAppend = "";
     public static String splitBy = " | ";
+    public static ArrayList<String> logString = new ArrayList<String>();
 
     public Storage(String filePath) {
         Storage.filePath = filePath;
@@ -42,14 +43,11 @@ public class Storage{
 
         if (!Files.isDirectory(Paths.get(path))) {
             File newFile = new File(path);
-//            System.out.println(f.getParent() + " has has been created");
             newFile.mkdir();
         }
 
         try{
             f.createNewFile();
-//            Ui.showMessage(file + " has been created.");
-//            System.out.println();
         }catch (IOException e){
             throw new DukeException("File not found");
 
@@ -140,6 +138,13 @@ public class Storage{
             textToAppend += splitBy+task.getDescription();
         }
         return textToAppend+System.lineSeparator();
+    }
+
+    public static void logCommand(String command){
+        logString.add(command);
+    }
+    public static ArrayList<String> getLogCommand(){
+        return logString;
     }
 
     /**

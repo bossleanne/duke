@@ -1,6 +1,5 @@
-E | 0 | project meeting at Oct 30 2021,6:00 pm
-E | 0 | project meeting at Oct 30 2021
+E | 1 | project meeting at Oct 30 2021
 E | 0 | project meeting at 6:00 pm
 D | 0 | submission by Nov 02 2021
 D | 0 | submission by Nov 02 2021,11:59 pm
-D | 0 | submission by 11:59 pm
+D | 1 | submission by 11:59 pm

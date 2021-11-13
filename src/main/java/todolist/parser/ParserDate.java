@@ -1,12 +1,11 @@
 package todolist.parser;
 
 import todolist.ui.DukeException;
+import todolist.utils.Matching;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class ParserDate {
     /**
@@ -33,7 +32,7 @@ public class ParserDate {
      */
     public boolean isStrDate(String dateStr){
         String regexDate = "\\d{1,2}\\/\\d{1,2}\\/\\d{1,4}";
-        String strDate = getMatch(dateStr,regexDate);
+        String strDate = Matching.getMatch(dateStr,regexDate);
         if(strDate.equals("-1")){
             return false;
         }
@@ -44,7 +43,7 @@ public class ParserDate {
      */
     public boolean isStrTime(String timeStr){
         String regexTime = "\\d{4}$";
-        String strTime = getMatch(timeStr,regexTime);
+        String strTime = Matching.getMatch(timeStr,regexTime);
         if(strTime.equals("-1")){
             return false;
         }
@@ -81,19 +80,19 @@ public class ParserDate {
         }
     }
 
-    /**
-     * A match function to match the regex and user input
-     * @param input matcher in string
-     * @param regex pattern in string
-     * @return matched string
-     */
-    public String getMatch(String input, String regex) {
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(input);
-        if (matcher.find()) {
-            return matcher.group();
-        } else {
-            return "-1";
-        }
-    }
+//    /**
+//     * A match function to match the regex and user input
+//     * @param input matcher in string
+//     * @param regex pattern in string
+//     * @return matched string
+//     */
+//    public String getMatch(String input, String regex) {
+//        Pattern pattern = Pattern.compile(regex);
+//        Matcher matcher = pattern.matcher(input);
+//        if (matcher.find()) {
+//            return matcher.group();
+//        } else {
+//            return "-1";
+//        }
+//    }
 }

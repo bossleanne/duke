@@ -6,6 +6,7 @@ import todolist.data.command.*;
 import todolist.data.task.*;
 import todolist.ui.DukeException;
 import todolist.ui.Ui;
+import todolist.utils.Matching;
 
 public class Parser {
     public static Task t;
@@ -35,9 +36,11 @@ public class Parser {
                 return new ListCommand();
             } else if (taskSplit[0].equals("help")){
                 return new HelpCommand();
-            } else {
+            } else if (taskSplit[0].equals("undo")){
+                    return new UndoCommand();
+            } else{
                 status = Status.valueOf(taskStatus);
-                String taskDescription = taskSplit[1];
+                String taskDescription = taskSplit[1].strip();
 
                 switch (status){
                 case TODO:
@@ -50,9 +53,9 @@ public class Parser {
                     t = createEvent(taskDescription);
                     return new AddCommand(t);
                 case DELETE:
-                    return new DeleteCommand(getTaskId(taskDescription));
+                    return new DeleteCommand(getValidTaskId(taskDescription));
                 case DONE:
-                    return new DoneCommand(getTaskId(taskDescription));
+                    return new DoneCommand(getValidTaskId(taskDescription));
                 case FIND:
                     SearchCommand s = new SearchCommand();
                     s.setSearch(taskDescription);
@@ -126,8 +129,13 @@ public class Parser {
      * @param fullCommand get the full description of Deadline string
      * @return the index of task display in list of tasks
      */
-    public static int getTaskId(String fullCommand) {
-        String doneIdStr= fullCommand.replaceAll("[^0-9]", "");
-        return Integer.parseInt(doneIdStr)-1;
+    public static int getValidTaskId(String fullCommand) throws DukeException{
+        int taskId = Integer.parseInt(fullCommand)-1;
+        if(Matching.getMatch(fullCommand, "^[0-9]+$")=="-1"){
+            throw new DukeException(Ui.inValidInput());
+        }else if(taskId < 0){
+            throw new DukeException("Invalid number input");
+        }
+        return taskId;
     }
 }

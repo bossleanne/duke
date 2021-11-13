@@ -32,6 +32,7 @@ public class AddCommand extends Command{
         tasks.addTask(task);
         ui.setSize(tasks.taskCount());
         ui.showAddMessage(task.toString());
+        storage.logCommand("add");
     }
 
     @Override

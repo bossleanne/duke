@@ -25,6 +25,7 @@ public class Event extends Task {
     public String getTime(){
         return at;
     }
+
     /**
      * Override the toString method in parents
      * @return a string of show content arranged in a formatted way
