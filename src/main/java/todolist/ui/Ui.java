@@ -137,7 +137,6 @@ public class Ui {
      *  Formats a string as a viewable indexed list item.
      * */
     public void showToUserAllTasks(TaskList taskList){
-        System.out.print(DASHES);
         for(int i = 0; i< taskList.taskCount();i++){
             System.out.println(i+1 + "."+taskList.getTasks(i).toString());
         }
