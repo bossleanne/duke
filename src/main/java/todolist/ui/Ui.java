@@ -69,7 +69,7 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
+
         System.out.println(DASHES
                 + logo
                 + " Hello! I'm Duke todolist apps, are you ready to start your day?\n"
@@ -87,7 +87,6 @@ public class Ui {
      * Display the result when take command execution from the user.
      */
     public void showAddMessage(String message) {
-//        showToUser(ADD_PREFIX,message,getSuffix());
         showToUser(ADD_PREFIX,message,getSuffix());
     }
     public void showDeleteMessage(String message) {

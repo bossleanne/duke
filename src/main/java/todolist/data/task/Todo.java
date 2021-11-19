@@ -4,7 +4,6 @@ package todolist.data.task;
  */
 public class Todo extends Task {
     protected boolean isDone;
-    public static final String COMMAND_WORD = "Todo";
 
     public Todo(String description) {
         super(description);

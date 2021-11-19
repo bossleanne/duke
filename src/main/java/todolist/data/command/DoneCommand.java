@@ -27,7 +27,7 @@ public class DoneCommand extends Command{
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
-//        assert(tasks.getTasks(taskId).getIsDone()==true);
+
         if(tasks.getTasks(taskId).getIsDone()){
             throw new DukeException("Task "+taskId+1+" already marked as done, re-enter new task ID");
         }

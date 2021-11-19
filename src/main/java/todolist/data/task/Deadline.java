@@ -6,7 +6,6 @@ package todolist.data.task;
 public class Deadline extends Task {
 
     protected String by;
-    public static final String COMMAND_WORD = "Deadline";
 
     public Deadline(String description, String by) {
         super(description);

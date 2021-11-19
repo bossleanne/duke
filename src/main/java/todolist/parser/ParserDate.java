@@ -79,20 +79,4 @@ public class ParserDate {
             throw new DukeException("Wrong time format, please re-enter a 4 digit time. e.g 1800");
         }
     }
-
-//    /**
-//     * A match function to match the regex and user input
-//     * @param input matcher in string
-//     * @param regex pattern in string
-//     * @return matched string
-//     */
-//    public String getMatch(String input, String regex) {
-//        Pattern pattern = Pattern.compile(regex);
-//        Matcher matcher = pattern.matcher(input);
-//        if (matcher.find()) {
-//            return matcher.group();
-//        } else {
-//            return "-1";
-//        }
-//    }
 }

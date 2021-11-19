@@ -25,30 +25,21 @@ public class UndoCommand extends Command{
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try{
             ArrayList<String> lastCommand = storage.getLogCommand();
-            String printOutMsg = "Undo the last action "
-                    +tasks.getTasks(tasks.taskCount()-1).toString();
 
             switch (lastCommand.get(lastCommand.size() - 1)){
                 case "add":
-//                    printOutMsg = "Undo the last action add "
-//                            +tasks.getTasks(tasks.taskCount()-1).toString();
                     tasks.deleteTask( tasks.taskCount()-1);
                     break;
                 case "delete":
-//                    printOutMsg = "Undo the last action delete "
-//                            +tasks.getTasks(tasks.taskCount()-1).toString();
                     tasks.addTask( DeleteCommand.tempDelete);
                     break;
                 case "done":
-//                    printOutMsg = "Undo the last action done "
-//                            +tasks.getTasks(tasks.taskCount()-1).toString();
                     tasks.getTasks(DoneCommand.tempDone).setIsDone(false);
                     break;
             }
             ui.setSize(tasks.taskCount());
+            System.out.println("Undo the last step, refresh the list");
             ui.showToUserAllTasks(tasks);
-//            System.out.print(printOutMsg);
-//            System.out.println(ui.getSuffix());
         }catch (IndexOutOfBoundsException  e){
             throw new DukeException("This action cannot be undone");
         }
