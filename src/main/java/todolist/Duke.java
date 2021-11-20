@@ -1,8 +1,5 @@
 package todolist;
 
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 import todolist.data.TaskList;
 import todolist.data.command.Command;
 import todolist.parser.Parser;
@@ -38,15 +35,7 @@ public class Duke{
             tasks = new TaskList();
         }
     }
-    //#### test out GUI
-//    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
 
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
-    }
     /** Runs the program until termination.  */
     public void run(){
         ui.greeting();
