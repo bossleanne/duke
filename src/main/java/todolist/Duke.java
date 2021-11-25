@@ -54,8 +54,13 @@ public class Duke{
         }
     }
 
-    public static void main(String[] args) {
-        Duke duke = new Duke("/Users/leanne/duke/todolist.txt");
-        duke.run();
+    public static void main(String[] args) throws DukeException {
+        try{
+            Duke duke = new Duke(args[0].strip());
+            duke.run();
+        }catch(ArrayIndexOutOfBoundsException e){
+            throw new DukeException("\n     Please enter the output folder, i.e. User/Duke");
+        }
+
     }
 }

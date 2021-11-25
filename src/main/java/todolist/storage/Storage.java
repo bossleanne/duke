@@ -39,7 +39,6 @@ public class Storage{
         String tmpPath = f.getAbsolutePath();
         int lastSlashPos = tmpPath.lastIndexOf('/');
         String path = tmpPath.substring(0, lastSlashPos);
-        String file = tmpPath.substring(lastSlashPos + 1, tmpPath.length());
 
         if (!Files.isDirectory(Paths.get(path))) {
             File newFile = new File(path);

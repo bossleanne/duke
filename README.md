@@ -15,9 +15,9 @@ This is a CLI(Command Line Interface) Todolist application written in OOP fashio
 - JDK 11, update Intellij to the most recent version.
 
 ## Using Command Line
-- download the `duke.jar` application
+- download the `sunli.jar` application
 - `cd` into the application's path, eg `cd `~/Download/`
-- type `java -jar duke.jar`
+- type `java -jar sunli.jar todolist.txt`
 
 ## Features
 - The sections below are shows the feature of this todolist application

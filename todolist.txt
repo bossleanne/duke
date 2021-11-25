@@ -1,3 +1,1 @@
 T | 0 | read book
-E | 0 | project meeting at Oct 30 2021,6:00 pm
-D | 0 | submission by Nov 02 2021,11:59 pm
